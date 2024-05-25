@@ -5,7 +5,7 @@ const server = "bomch4nte\\SQLEXPRESS";
 const database = "MovieApp";
 const userName = "bomch4nte\\Murat";
 const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
-
+//canommmmm
 const register = async (req, res) => {
     const { username, password, isAdmin } = req.body;
     const checkUserQuery = `SELECT COUNT(*) AS userCount FROM Users WHERE Username = ?`;
