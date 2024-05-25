@@ -1,9 +1,8 @@
-class Rating {
-    constructor(userId, movieId, rating) {
-        this.userId = userId;
-        this.movieId = movieId;
-        this.rating = rating;
+class Hall {
+    constructor(name, capacity) {
+        this.name = name;
+        this.capacity = capacity;
     }
 }
 
-module.exports = Rating;
+module.exports = Hall;

@@ -1,12 +1,18 @@
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import Routing from "./routes/Routing";
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import MoviesPage from "./components/MoviesPage";
+import ReservationsPage from "./components/ReservationsPage";
 function App() {
   return (
-    <>
-      <GoogleOAuthProvider clientId="991598614961-me6q8mi64u2o7kkodcplbu28ojp9qi01.apps.googleusercontent.com">
-        <Routing />
-      </GoogleOAuthProvider>    </>
+    <Router>
+      <Routes>
+        
+        <Route path="/"  component={<Home />} />
+        <Route path="/movies" component={<MoviesPage />} />
+        <Route path="/reservations" component={<ReservationsPage />} />
+      </Routes>
+    </Router>
   );
 }
 

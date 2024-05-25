@@ -1,13 +1,10 @@
 class Movie {
-    constructor(name, duration, genre, director, leadActors, country) {
-        this.name = name;
+    constructor(title, summary, duration, director, genre) {
+        this.title = title;
+        this.summary = summary;
         this.duration = duration;
-        this.genre = genre;
         this.director = director;
-        this.leadActors = leadActors;
-        this.country = country;
-        this.rating = 0;
-        this.totalRatings = 0;
+        this.genre = genre;
     }
 }
 
