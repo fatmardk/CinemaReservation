@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeReservation } from '../services/api';
+import { makeReservation } from '../../services/api';
 
 const ReservationsPage = () => {
     const [showtime_id, setShowtimeId] = useState('');

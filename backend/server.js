@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // Import routes
 const userRoutes = require('./routes/userRoute');
@@ -9,6 +10,7 @@ const reservationRoutes = require('./routes/reservationRoute');
 
 // Create Express app
 const app = express();
+app.use(cors());
 
 // Middleware
 app.use(bodyParser.json());

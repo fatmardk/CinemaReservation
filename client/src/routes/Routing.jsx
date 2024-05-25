@@ -7,6 +7,8 @@ import Home from "../pages/Home";
 import Movies from "../pages/movies/Movies";
 import AddMovie from "../pages/movies/AddMovie";
 import UpdateMovie from "../pages/movies/UpdateMovie";
+import MoviesPage from "../pages/movies/MoviesPage";
+import ReservationsPage from "../pages/reservation/ReservationsPage";
 
 const Routing = () => {
   return (
@@ -30,6 +32,9 @@ const Routing = () => {
             <Route path="add" element={<AddMovie />} />
             <Route path="edit/:id" element={<UpdateMovie />} />
           </Route>
+          <Route path="reservation" element={<ReservationsPage />} />
+          
+
         </Route>
       </Routes>
     </Router>
