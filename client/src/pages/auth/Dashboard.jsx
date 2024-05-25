@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
+    // canooomm
     <Wrapper>
       <div className="container flex justify-center items-center flex-wrap text-center">
         <Link to="/dashboard/team/register" className="team p-5">
