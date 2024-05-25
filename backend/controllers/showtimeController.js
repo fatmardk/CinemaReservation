@@ -1,4 +1,5 @@
 const sql = require('msnodesqlv8');
+const Showtime = require('../models/Showtime');
 
 const server = "LAPTOP-EJE4K8T5\\SQLEXPRESS";
 const database = "SinemaRezervasyon";
@@ -16,37 +17,34 @@ const addShowtime = async (req, res) => {
         sql.query(connectionString, insertShowtimeQuery, [movie_id, hall_id, start_time, end_time], (err, result) => {
             if (err) {
                 console.log(err);
-                res.status(500).json({ error: "Server internal error." });
+                return res.status(500).json({ error: "Server internal error." });
             } else {
-                res.status(201).json({ msg: 'Showtime added successfully.' });
+                return res.status(201).json({ msg: "Showtime added successfully." });
             }
         });
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ error: "Server internal error." });
+        return res.status(500).json({ error: "Server internal error." });
     }
 };
 
 const listShowtimes = async (req, res) => {
-    const listShowtimesQuery = `
-        SELECT st.showtime_id, m.title, h.name as hall_name, st.start_time, st.end_time
-        FROM Tbl_Showtimes st
-        JOIN Tbl_Movies m ON st.movie_id = m.movie_id
-        JOIN Tbl_Halls h ON st.hall_id = h.hall_id
+    const getShowtimesQuery = `
+        SELECT * FROM Tbl_Showtimes
     `;
 
     try {
-        sql.query(connectionString, listShowtimesQuery, (err, rows) => {
+        sql.query(connectionString, getShowtimesQuery, (err, result) => {
             if (err) {
                 console.log(err);
-                res.status(500).json({ error: "Server internal error." });
+                return res.status(500).json({ error: "Server internal error." });
             } else {
-                res.status(200).json(rows);
+                return res.status(200).json(result);
             }
         });
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ error: "Server internal error." });
+        return res.status(500).json({ error: "Server internal error." });
     }
 };
 

@@ -6,44 +6,51 @@ const userName = "LAPTOP-EJE4K8T5\\USER";
 const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
 
 const makeReservation = async (req, res) => {
-    const { showtime_id, customer_name, seat_number, category } = req.body;
-    const checkSeatsQuery = `
-        SELECT COUNT(*) AS reservedCount, h.capacity
-        FROM Tbl_Reservations r
-        JOIN Tbl_Showtimes st ON r.showtime_id = st.showtime_id
-        JOIN Tbl_Halls h ON st.hall_id = h.hall_id
-        WHERE r.showtime_id = ?
-    `;
-    const insertReservationQuery = `
-        INSERT INTO Tbl_Reservations (showtime_id, customer_name, seat_number, category)
-        VALUES (?, ?, ?, ?)
-    `;
+  const { user_id, showtime_id, seat_number, category, price } = req.body;
+  const checkSeatsQuery = `
+      SELECT COUNT(r.seat_number) AS reservedCount, h.capacity
+      FROM Tbl_Reservations r
+      JOIN Tbl_Showtimes st ON r.showtime_id = st.showtime_id
+      JOIN Tbl_Halls h ON st.hall_id = h.hall_id
+      WHERE r.showtime_id = ?
+      GROUP BY h.capacity
+  `;
+  const insertReservationQuery = `
+      INSERT INTO Tbl_Reservations (user_id, showtime_id, seat_number, category, price)
+      VALUES (?, ?, ?, ?, ?)
+  `;
 
-    try {
-        sql.query(connectionString, checkSeatsQuery, [showtime_id], (err, result) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({ error: "Server internal error." });
-            }
+  try {
+      // Koltuk sayısını ve salon kapasitesini kontrol et
+      sql.query(connectionString, checkSeatsQuery, [showtime_id], (err, result) => {
+          if (err) {
+              console.log(err);
+              return res.status(500).json({ error: "Server internal error." });
+          }
 
-            const { reservedCount, capacity } = result[0];
-            if (reservedCount >= capacity) {
-                return res.status(400).json({ error: "No available seats." });
-            }
+          // Sonuçlar uygun formatta mı?
+          if (result.length > 0) {
+              const { reservedCount, capacity } = result[0];
+              if (reservedCount >= capacity) {
+                  return res.status(400).json({ error: "No available seats." });
+              }
+          } else {
+              return res.status(400).json({ error: "Invalid showtime ID or no data found." });
+          }
 
-            sql.query(connectionString, insertReservationQuery, [showtime_id, customer_name, seat_number, category], (err, result) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ error: "Server internal error." });
-                }
+          // Rezervasyon yap
+          sql.query(connectionString, insertReservationQuery, [user_id, showtime_id, seat_number, category, price], (err, result) => {
+              if (err) {
+                  console.log(err);
+                  return res.status(500).json({ error: "Server internal error." });
+              }
 
-                return res.status(201).json({ msg: 'Reservation made successfully.' });
-            });
-        });
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).json({ error: "Server internal error." });
-    }
+              return res.status(201).json({ msg: 'Reservation made successfully.' });
+          });
+      });
+  } catch (error) {
+      console.log(error.message);
+      return res.status(500).json({ error: "Server internal error." });
+  }
 };
-
 module.exports = { makeReservation };

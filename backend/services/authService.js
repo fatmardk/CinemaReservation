@@ -1,5 +1,6 @@
 const bcyrpt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const hashedPassword = async (password) => {
     const salt = await bcyrpt.genSalt(10);
