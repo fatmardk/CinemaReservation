@@ -17,8 +17,8 @@ const Wrapper = ({ children }) => {
     <>
       <Sidebar side={side} closeSidebar={closeSidebar} />
       <AdminNavigation openSidebar={openSidebar} />
-      <section className="ml-0 sm:ml-64 bg-custom-gradient min-h-screen pt-28">
-        <div className=" text-white p-4">{children}</div>
+      <section className="ml-0 sm:ml-64 bg-palette2 min-h-screen pt-28">
+        <div className="bg-palette3 text-white p-4">{children}</div>
       </section>
     </>
   );

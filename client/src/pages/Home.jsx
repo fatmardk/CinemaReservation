@@ -1,8 +1,9 @@
 import React from 'react'
+import Wrapper from './dashboard/Wrapper'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <Wrapper>Home</Wrapper>
   )
 }
 

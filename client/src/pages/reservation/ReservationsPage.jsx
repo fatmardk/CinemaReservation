@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeReservation } from '../../services/api';
+import Wrapper from '../dashboard/Wrapper';
 
 const ReservationsPage = () => {
     const [showtime_id, setShowtimeId] = useState('');
@@ -18,7 +19,7 @@ const ReservationsPage = () => {
     };
 
     return (
-        <div>
+        <Wrapper>
             <h1>Make a Reservation</h1>
             <input
                 type="text"
@@ -51,7 +52,7 @@ const ReservationsPage = () => {
                 placeholder="Price"
             />
             <button onClick={handleReservation}>Make Reservation</button>
-        </div>
+        </Wrapper>
     );
 };
 
