@@ -1,34 +1,31 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
-    const sql = require("msnodesqlv8");
+const bodyParser = require('body-parser');
 
-// Replace the following parameters with your actual database information.
-const server = "bomch4nte\\SQLEXPRESS";
-const database = "MovieApp";
-const userName = "bomch4nte\\Murat";
-const password = "";
+// Import routes
+const userRoutes = require('./routes/userRoutes');
+const movieRoutes = require('./routes/movieRoutes');
+const showtimeRoutes = require('./routes/showtimeRoutes');
+const reservationRoutes = require('./routes/reservationRoutes');
 
-const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const queryStr = "SELECT * FROM [dbo].[Users]";
+// Use routes
+app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/showtimes', showtimeRoutes);
+app.use('/api/reservations', reservationRoutes);
 
-const run = async (queryStr) => {
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
-    const respp = sql.query(connectionString, queryStr, (err, rows) => {
-        if (err) {
-            console.log(err);
-            throw err;
-        } else if (rows) {
-            console.log(rows);
-            return rows;
-        } else {
-            console.log("nothing here");
-            return;
-        }
-    });
-
-
-};
-
-run(queryStr);
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

@@ -1,11 +1,10 @@
 const sql = require('msnodesqlv8');
 const { comparePassword, createToken } = require('../services/authService');
 
-const server = "bomch4nte\\SQLEXPRESS";
-const database = "MovieApp";
-const userName = "bomch4nte\\Murat";
+const server = "LAPTOP-EJE4K8T5\\SQLEXPRESS";
+const database = "SinemaRezervasyon";
+const userName = "LAPTOP-EJE4K8T5\\USER";
 const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
-//canommmmm
 const register = async (req, res) => {
     const { username, password, isAdmin } = req.body;
     const checkUserQuery = `SELECT COUNT(*) AS userCount FROM Users WHERE Username = ?`;

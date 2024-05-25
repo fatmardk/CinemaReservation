@@ -1,37 +1,34 @@
 const express = require('express');
-require('dotenv').config();
-require('colors');
-const cors = require('cors');
-const connect = require('./config/db');
-const userRoute = require('./routes/userRoute');
-const movieRoute = require('./routes/movieRoute');
-const ratingRoute = require('./routes/ratingRoute');
-const commentRoute = require('./routes/commentRoute');
-const authRoute = require('./routes/authRoute');
+const bodyParser = require('body-parser');
 
+// Import routes
+const userRoutes = require('./routes/userRoute');
+
+const movieRoutes = require('./routes/movieRoute');
+const showtimeRoutes = require('./routes/showtimeRoute');
+const reservationRoutes = require('./routes/reservationRoute');
+
+// Create Express app
 const app = express();
 
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Use routes
+app.use('/api/users', userRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/showtimes', showtimeRoutes);
+app.use('/api/reservations', reservationRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+// Start server
 const PORT = process.env.PORT || 3000;
-
-app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-
-app.listen(PORT, () => console.log(`Server is running at ${PORT} port!`.magenta.italic));
-
-app.use('/api', userRoute);
-app.use('/api', movieRoute);
-app.use('/api', ratingRoute);
-app.use('/api', commentRoute);
-app.use('/api', authRoute);
-
-const startServer = async () => {
-    // try {
-    //     const response = await connect(qStr);
-    //     console.log('Query result:', response);
-    // } catch (err) {
-    //     console.error('Error executing query', err);
-    // }
-};
-
-startServer();
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

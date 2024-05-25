@@ -5,20 +5,20 @@ const database = "SinemaRezervasyon";
 const userName = "LAPTOP-EJE4K8T5\\USER";
 const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
 
-const addMovie = async (req, res) => {
-    const { title, summary, duration, director, genre } = req.body;
-    const insertMovieQuery = `
-        INSERT INTO Tbl_Movies (title, summary, duration, director, genre)
-        VALUES (?, ?, ?, ?, ?)
+const addShowtime = async (req, res) => {
+    const { movie_id, hall_id, start_time, end_time } = req.body;
+    const insertShowtimeQuery = `
+        INSERT INTO Tbl_Showtimes (movie_id, hall_id, start_time, end_time)
+        VALUES (?, ?, ?, ?)
     `;
 
     try {
-        sql.query(connectionString, insertMovieQuery, [title, summary, duration, director, genre], (err, result) => {
+        sql.query(connectionString, insertShowtimeQuery, [movie_id, hall_id, start_time, end_time], (err, result) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({ error: "Server internal error." });
             } else {
-                res.status(201).json({ msg: 'Movie added successfully.' });
+                res.status(201).json({ msg: 'Showtime added successfully.' });
             }
         });
     } catch (error) {
@@ -27,11 +27,16 @@ const addMovie = async (req, res) => {
     }
 };
 
-const listMovies = async (req, res) => {
-    const listMoviesQuery = `SELECT * FROM Tbl_Movies`;
+const listShowtimes = async (req, res) => {
+    const listShowtimesQuery = `
+        SELECT st.showtime_id, m.title, h.name as hall_name, st.start_time, st.end_time
+        FROM Tbl_Showtimes st
+        JOIN Tbl_Movies m ON st.movie_id = m.movie_id
+        JOIN Tbl_Halls h ON st.hall_id = h.hall_id
+    `;
 
     try {
-        sql.query(connectionString, listMoviesQuery, (err, rows) => {
+        sql.query(connectionString, listShowtimesQuery, (err, rows) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({ error: "Server internal error." });
@@ -45,4 +50,4 @@ const listMovies = async (req, res) => {
     }
 };
 
-module.exports = { addMovie, listMovies };
+module.exports = { addShowtime, listShowtimes };
