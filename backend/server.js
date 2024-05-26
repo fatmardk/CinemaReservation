@@ -22,6 +22,7 @@ app.use('/api/movies', movieRoutes);
 app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/reservations', reservationRoutes);
 
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);

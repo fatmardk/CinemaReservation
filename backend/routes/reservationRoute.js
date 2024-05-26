@@ -1,8 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { makeReservation } = require('../controllers/reservationController');
+const {
+  makeReservation,
+  getReservedSeats,
+} = require("../controllers/reservationController");
 
-// Make a reservation
-router.post('/make', makeReservation);
+
+router.post("/make", makeReservation);
+router.get("/seats/:showtime_id", getReservedSeats);
 
 module.exports = router;

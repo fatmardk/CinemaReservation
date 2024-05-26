@@ -3,9 +3,7 @@ import { useAuthLoginMutation } from "../../features/auth/authService";
 import { setAdminToken } from "../../app/reducers/authReducer";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
-import AppleLogin from "react-apple-login";
 
 const LoginAdmin = () => {
   const dispatch = useDispatch();
@@ -45,7 +43,7 @@ const LoginAdmin = () => {
 
       localStorage.setItem("admin-token", token);
       dispatch(setAdminToken(token));
-      navigate("/auth/dashboard/");
+      navigate("/dashboard/");
     }
   }, [response.isSuccess]);
 
@@ -96,27 +94,6 @@ const LoginAdmin = () => {
               value={response.isLoading ? "Loading ... " : "Sign In"}
               className="bg-indigo-600 w-full p-3 cursor-pointer text-white rounded-lg"
             />
-          </div>
-          <div className="flex flex-col justify-evenly items-center">
-            <div className="mb-3 cursor-pointer">
-              <AppleLogin
-                clientId="com.react.apple.login"
-                redirectURI="https://redirectUrl.com"
-              />
-            </div>
-            <div className="mb-3">
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  const decoded = jwt_decode(credentialResponse?.credential);
-                  const { username, sub } = decoded;
-                  const userData = { username, sub };
-                  login(userData);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-            </div>
           </div>
         </div>
       </form>
