@@ -13,7 +13,7 @@ const Sidebar = ({ side, closeSidebar }) => {
       className={`fixed z-10 top-0 ${side} sm:left-0  w-64 h-screen bg-palette1 transition-all ease-in-out duration-200`}
     >
       <div>
-        <img src="././public/logo.png" alt="Logo" />
+        <img src="././public/images/logo.png" alt="Logo" />
       </div>
       <ul className="mt-3">
         <li className="px-4 py-3 transition-all text-white flex items-center justify-center sm:hidden">
@@ -34,16 +34,16 @@ const Sidebar = ({ side, closeSidebar }) => {
             Settings Movie
           </Link>
         </li>
-        <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
+        {/* <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsPeople className="mr-2 text-lg inline-block" />
           <Link to="/dashboard/showtimes/hall" className="text-base capitalize">
             Halls
           </Link>
-        </li>
+        </li> */}
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsBarChart className="mr-2 text-lg inline-block" />
-          <Link to="/dashboard/categories" className="text-base capitalize">
-            Categories
+          <Link to="/dashboard/showtimes/create" className="text-base capitalize">
+            Add Showtime
           </Link>
         </li>
       </ul>

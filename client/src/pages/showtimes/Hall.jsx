@@ -35,22 +35,31 @@ const HallsList = () => {
       {isLoading ? (
         <Spinner />
       ) : halls.length > 0 ? (
-        <table className="w-full bg-palette1 rounded-md">
-          <thead>
-            <tr className="border-b border-gray-800 text-left">
-              <th className="p-3 uppercase text-base font-sm text-gray-500">Hall Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {halls.map((hall) => (
-              <tr key={hall.id} className="odd:bg-gray-800">
-                <td className="p-3 capitalize text-sm font-normal text-gray-400">
-                  <Link to={`/dashboard/showtimes/hall/${hall.id}`}>{hall.name}</Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div>
+          {halls.map((hall) => (
+            <div key={hall.id} className="mb-4">
+              <h2 className="text-lg font-semibold">Hall {hall.name}</h2>
+              <table className="w-full bg-palette1 rounded-md mt-2">
+                <thead>
+                  <tr className="border-b border-gray-800 text-left">
+                    <th className="p-3 uppercase text-base font-sm text-gray-500">Movie Title</th>
+                    <th className="p-3 uppercase text-base font-sm text-gray-500">Start Time</th>
+                    <th className="p-3 uppercase text-base font-sm text-gray-500">End Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {hall.showtimes.map((showtime) => (
+                    <tr key={showtime.id} className="odd:bg-gray-800">
+                      <td className="p-3 capitalize text-sm font-normal text-gray-400">{showtime.movie_title}</td>
+                      <td className="p-3 capitalize text-sm font-normal text-gray-400">{showtime.start_time}</td>
+                      <td className="p-3 capitalize text-sm font-normal text-gray-400">{showtime.end_time}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No halls available.</p>
       )}

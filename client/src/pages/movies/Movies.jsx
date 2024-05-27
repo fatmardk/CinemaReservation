@@ -9,9 +9,11 @@ const Movies = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const deleteMovie = async (id) => {
+    const url = `http://localhost:8080/api/movies/delete/${id}`;
+
     if (window.confirm("Are you sure you want to delete this movie?")) {
       try {
-        const response = await fetch(`http://localhost:8080/movies/delete/${id}`, {
+        const response = await fetch(url, {
           method: "DELETE",
         });
 
@@ -23,9 +25,9 @@ const Movies = () => {
         alert(result.msg);
 
         // Update state to remove the deleted movie
-        setMovies(movies.filter((movie) => movie.MovieID !== id));
+        setMovies((prevMovies) => prevMovies.filter((movie) => movie.MovieID !== id));
       } catch (error) {
-        console.error(error.message);
+        console.error("Error deleting the movie:", error);
         alert("There was an error deleting the movie.");
       }
     }
@@ -34,7 +36,7 @@ const Movies = () => {
   useEffect(() => {
     const getAllMovies = async () => {
       try {
-        const url = "http://localhost:8080/movies";
+        const url = "http://localhost:8080/api/movies";
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -89,16 +91,16 @@ const Movies = () => {
                   <td className="p-3 capitalize text-sm font-normal text-gray-400">
                     <Link
                       to={`/dashboard/movies/update/${movie.MovieID}`}
-                      className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md"
+                      className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md mr-2"
                     >
                       Edit
                     </Link>
-                    <a
+                    <button
                       className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md"
                       onClick={() => deleteMovie(movie.MovieID)}
                     >
                       Delete
-                    </a>
+                    </button>
                   </td>
                 </tr>
               ))}

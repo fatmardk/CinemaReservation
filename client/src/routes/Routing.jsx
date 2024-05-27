@@ -10,7 +10,7 @@ import MoviesPage from "../pages/movies/MoviesPage";
 import ReservationsPage from "../pages/reservation/ReservationsPage";
 import Showtimes from "../pages/showtimes/ShowTimes";
 import CreateShowTime from "../pages/showtimes/CreateShowTime";
-import ShowtimesByHall from "../pages/showtimes/ShowTimesByHall";
+import ShowtimesByHall from "../pages/showtimes/ShowTimesByHall"; // Burası
 import MoviesWithShowtimes from "../pages/reservation/MoviesWithShowtimes";
 import MakeReservation from "../pages/reservation/MakeReservation";
 import SeatSelection from "../pages/reservation/SeatSelection";
