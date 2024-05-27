@@ -13,7 +13,7 @@ const Sidebar = ({ side, closeSidebar }) => {
       className={`fixed z-10 top-0 ${side} sm:left-0  w-64 h-screen bg-palette1 transition-all ease-in-out duration-200`}
     >
       <div>
-        <img src="/logo.png" alt="Logo" />
+        <img src="././public/logo.png" alt="Logo" />
       </div>
       <ul className="mt-3">
         <li className="px-4 py-3 transition-all text-white flex items-center justify-center sm:hidden">
@@ -24,20 +24,20 @@ const Sidebar = ({ side, closeSidebar }) => {
         </li>
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsCardList className="mr-2 text-lg inline-block" />
-          <Link to="/dashboard/products" className="text-base capitalize">
-            Products
+          <Link to="/dashboard/reservation" className="text-base capitalize">
+            New Customer
           </Link>
         </li>
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsBagCheck className="mr-2 text-lg inline-block" />
-          <Link to="/dashboard/products" className="text-base capitalize">
-            Orders
+          <Link to="/dashboard/movies" className="text-base capitalize">
+            Settings Movie
           </Link>
         </li>
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsPeople className="mr-2 text-lg inline-block" />
-          <Link to="/dashboard/products" className="text-base capitalize">
-            Customers
+          <Link to="/dashboard/showtimes/hall" className="text-base capitalize">
+            Halls
           </Link>
         </li>
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">

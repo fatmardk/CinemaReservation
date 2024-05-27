@@ -35,6 +35,7 @@ const authReducer = createSlice({
   reducers: {
     setAdminToken: (state, action) => {
       state.adminToken = action.payload;
+      state.user = jwtDecode(action.payload);
     },
     setUserToken: (state, action) => {
       state.userToken = action.payload;

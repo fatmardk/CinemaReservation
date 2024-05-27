@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useAuthLoginMutation } from "../../features/auth/authService";
-import { setAdminToken } from "../../app/reducers/authReducer";
+import { useAuthLoginMutation, useUserLoginMutation } from "../../features/auth/authService";
+import { setAdminToken, setUserToken } from "../../app/reducers/authReducer";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -23,7 +23,7 @@ const LoginAdmin = () => {
     }));
   };
 
-  const [login, response] = useAuthLoginMutation();
+  const [login, response] = useUserLoginMutation();
 
   console.log("Response : ", response);
 
@@ -41,8 +41,8 @@ const LoginAdmin = () => {
     if (response.isSuccess) {
       const token = response?.data?.token;
 
-      localStorage.setItem("admin-token", token);
-      dispatch(setAdminToken(token));
+      localStorage.setItem("user-token", token);
+      dispatch(setUserToken(token));
       navigate("/dashboard/");
     }
   }, [response.isSuccess]);

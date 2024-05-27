@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner";
 import { Link, useParams } from "react-router-dom";
+import Wrapper from "../dashboard/Wrapper";
 
 const FilmSalonlari = () => {
   const { movie_id } = useParams();
@@ -31,7 +32,8 @@ const FilmSalonlari = () => {
   }, [movie_id]);
 
   return (
-    <div>
+    <Wrapper>
+      <div>
       {isLoading ? (
         <Spinner />
       ) : showtimes.length > 0 ? (
@@ -69,6 +71,7 @@ const FilmSalonlari = () => {
         "There are no showtimes for this movie yet."
       )}
     </div>
+    </Wrapper>
   );
 };
 

@@ -10,122 +10,231 @@ const getReservedSeats = async (req, res) => {
 
   const getReservedSeatsQuery = `
       SELECT seat_number FROM Tbl_Reservations 
-      WHERE showtime_id = ${showtime_id}
+      WHERE showtime_id = ?
   `;
   const getHallCapacityQuery = `
       SELECT h.capacity FROM Tbl_Halls h
       JOIN Tbl_Showtimes s ON h.hall_id = s.hall_id
-      WHERE s.showtime_id = ${showtime_id}
+      WHERE s.showtime_id = ?
   `;
 
   try {
-    sql.query(connectionString, getReservedSeatsQuery, (err, reservedSeatsResult) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({ error: "Server internal error." });
-      }
-
-      const seatNumbers = reservedSeatsResult.map((row) => row.seat_number);
-
-      sql.query(connectionString, getHallCapacityQuery, (err, hallCapacityResult) => {
+    sql.query(
+      connectionString,
+      getReservedSeatsQuery,
+      [showtime_id],
+      (err, reservedSeatsResult) => {
         if (err) {
-          console.log(err);
+          console.error(err);
           return res.status(500).json({ error: "Server internal error." });
         }
 
-        if (hallCapacityResult.length > 0) {
-          const { capacity } = hallCapacityResult[0];
-          return res.status(200).json({ reservedSeats: seatNumbers, hallCapacity: capacity });
-        } else {
-          return res.status(404).json({ error: "Hall capacity not found." });
-        }
-      });
-    });
+        const seatNumbers = reservedSeatsResult.map((row) => row.seat_number);
+
+        sql.query(
+          connectionString,
+          getHallCapacityQuery,
+          [showtime_id],
+          (err, hallCapacityResult) => {
+            if (err) {
+              console.error(err);
+              return res.status(500).json({ error: "Server internal error." });
+            }
+
+            if (hallCapacityResult.length > 0) {
+              const { capacity } = hallCapacityResult[0];
+              return res
+                .status(200)
+                .json({ reservedSeats: seatNumbers, hallCapacity: capacity });
+            } else {
+              return res
+                .status(404)
+                .json({ error: "Hall capacity not found." });
+            }
+          }
+        );
+      }
+    );
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     return res.status(500).json({ error: "Server internal error." });
   }
 };
 
 const makeReservation = async (req, res) => {
-  const { user_id, showtime_id, seat_number, category } = req.body;
+  const { user_id, showtime_id, seat_number, priceCategory, discountDay } =
+    req.body;
+  const date = new Date();
+  const currentDate = date.toLocaleDateString("en-US", { weekday: "long" });
 
-  // Aynı gösterim ve koltuk numarası için mevcut rezervasyon olup olmadığını kontrol et
+  const tempBool = currentDate == discountDay;
+  let priceCat = 2;
+  if (tempBool) {
+    priceCat = priceCategory == 1 ? 3 : 4;
+  }
+
   const checkReservationQuery = `
       SELECT * FROM Tbl_Reservations 
-      WHERE showtime_id = ${showtime_id} AND seat_number = ${seat_number}
+      WHERE showtime_id = ? AND seat_number = ?
   `;
 
   try {
-    sql.query(connectionString, checkReservationQuery, (err, checkResult) => {
-      if (err) {
-        console.log(err);
-        if (!res.headersSent) {
+    sql.query(
+      connectionString,
+      checkReservationQuery,
+      [showtime_id, seat_number],
+      (err, checkResult) => {
+        if (err) {
+          console.error(err);
           return res.status(500).json({ error: "Server internal error." });
         }
-      }
 
-      if (checkResult.length > 0) {
-        // Aynı gösterim ve koltuk numarası için bir rezervasyon var
-        if (!res.headersSent) {
+        if (checkResult.length > 0) {
           return res
             .status(400)
             .json({ error: "This seat is already reserved." });
-        }
-      } else {
-        // Aynı gösterim ve koltuk numarası için rezervasyon yok, fiyatı al ve rezervasyon ekle
-        const getPriceQuery = `
-                  SELECT price FROM Tbl_Prices WHERE category = '${category}'
-              `;
+        } else {
+          const getPriceQuery = `
+            SELECT price FROM Tbl_Prices WHERE price_id = ?
+          `;
 
-        sql.query(connectionString, getPriceQuery, (err, priceResult) => {
-          if (err) {
-            console.log(err);
-            if (!res.headersSent) {
-              return res.status(500).json({ error: "Server internal error." });
-            }
-          }
-
-          if (priceResult.length === 0) {
-            if (!res.headersSent) {
-              return res
-                .status(404)
-                .json({ error: "Price not found for the given category." });
-            }
-          }
-
-          const price = priceResult[0].price;
-
-          // Rezervasyonu ekle
-          const addReservationQuery = `
-                      INSERT INTO Tbl_Reservations (user_id, showtime_id, seat_number, category, price)
-                      VALUES (${user_id}, ${showtime_id}, ${seat_number}, '${category}', ${price})
-                  `;
-
-          sql.query(connectionString, addReservationQuery, (err, result) => {
-            if (err) {
-              console.log(err);
-              if (!res.headersSent) {
+          sql.query(
+            connectionString,
+            getPriceQuery,
+            [priceCat],
+            (err, priceResult) => {
+              if (err) {
+                console.error(err);
                 return res
                   .status(500)
                   .json({ error: "Server internal error." });
               }
+
+              if (priceResult.length === 0) {
+                return res.status(404).json({
+                  error: "Price not found for the given category ID.",
+                });
+              }
+
+              const price = priceResult[0].price;
+
+              const discountedPrice = price;
+              let priceTemp;
+              switch (priceCategory) {
+                case 1:
+                  priceTemp = "Ogrenci";
+                  break;
+                case 2:
+                  priceTemp = "Sivil";
+                  break;
+                default:
+                  priceTemp = "Sivil";
+                  break;
+              }
+
+              const addReservationQuery = `
+                INSERT INTO Tbl_Reservations (user_id, showtime_id, seat_number, category, price)
+                VALUES (?, ?, ?, ?, ?)
+              `;
+
+              sql.query(
+                connectionString,
+                addReservationQuery,
+                [user_id, showtime_id, seat_number, priceTemp, discountedPrice],
+                (err, result) => {
+                  if (err) {
+                    console.error(err);
+                    return res
+                      .status(500)
+                      .json({ error: "Server internal error." });
+                  }
+                  return res.status(200).json({
+                    message: "Reservation successful.",
+                    discountedPrice: discountedPrice, // Return discounted price
+                  });
+                }
+              );
             }
-            if (!res.headersSent) {
-              return res
-                .status(200)
-                .json({ message: "Reservation successful." });
-            }
-          });
-        });
+          );
+        }
       }
-    });
+    );
   } catch (error) {
-    console.log(error.message);
-    if (!res.headersSent) {
-      return res.status(500).json({ error: "Server internal error." });
-    }
+    console.error(error.message);
+    return res.status(500).json({ error: "Server internal error." });
   }
 };
 
-module.exports = { makeReservation, getReservedSeats };
+const getShowtimeDetails = async (req, res) => {
+  const { showtime_id } = req.params;
+
+  const getShowtimeDetailsQuery = `
+    SELECT 
+      s.start_time, 
+      s.end_time, 
+      m.title AS movie_title, 
+      h.name AS hall_name
+    FROM Tbl_Showtimes s
+    JOIN Tbl_Movies m ON s.movie_id = m.movie_id
+    JOIN Tbl_Halls h ON s.hall_id = h.hall_id
+    WHERE s.showtime_id = ?
+  `;
+
+  const getPricesQuery = `
+    SELECT 
+      price_id,
+      category,
+      price
+    FROM Tbl_Prices
+  `;
+
+  try {
+    // Get Showtime Details
+    sql.query(
+      connectionString,
+      getShowtimeDetailsQuery,
+      [showtime_id],
+      (err, showtimeDetailsResult) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Server internal error." });
+        }
+
+        if (showtimeDetailsResult.length === 0) {
+          return res.status(404).json({ error: "Showtime details not found." });
+        }
+
+        const showtimeDetails = showtimeDetailsResult[0];
+
+        // Get Prices
+        sql.query(connectionString, getPricesQuery, (err, pricesResult) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Server internal error." });
+          }
+
+          const prices = pricesResult.map((row) => ({
+            price_id: row.price_id,
+            category: row.category,
+            price: row.price,
+          }));
+
+          return res.status(200).json({
+            showtimeDetails: {
+              start_time: showtimeDetails.start_time,
+              end_time: showtimeDetails.end_time,
+              movie_title: showtimeDetails.movie_title,
+              hall_name: showtimeDetails.hall_name,
+            },
+            prices: prices,
+          });
+        });
+      }
+    );
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ error: "Server internal error." });
+  }
+};
+
+module.exports = { makeReservation, getReservedSeats, getShowtimeDetails };

@@ -18,6 +18,7 @@ useEffect(() => {
       }
 
       const moviesResult = await response.json();
+      console.log(moviesResult);
       setMovies(moviesResult);
     } catch (error) {
       console.error(error.message);

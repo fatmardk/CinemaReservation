@@ -5,6 +5,7 @@ const database = "SinemaRezervasyon";
 const userName = "LAPTOP-EJE4K8T5\\USER";
 const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
 
+
 const addMovie = async (req, res) => {
     const { title, summary, duration, director, genre } = req.body;
     const insertMovieQuery = `

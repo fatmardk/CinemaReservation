@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Spinner from "../../components/Spinner";
+import Wrapper from "../dashboard/Wrapper";
 
 const MoviesWithShowtimes = () => {
   const [movies, setMovies] = useState([]);
@@ -27,10 +27,9 @@ const MoviesWithShowtimes = () => {
     fetchShowtimes();
   }, []);
 
-  console.log(movies);
-
   return (
-    <div>
+   <Wrapper>
+     <div>
       <h2>Movies and Showtimes</h2>
       {isLoading ? (
         <Spinner />
@@ -40,13 +39,11 @@ const MoviesWithShowtimes = () => {
           <div key={movie.movie_id}>
             <h3>{movie.title}</h3>
             <ul>
-              {movie.map((showtime) => (
+              {movie.showtimes.map((showtime) => (
                 <li key={showtime.showtime_id}>
-                  {showtime.start_time} - {showtime.end_time} at{" "}
-                  {showtime.hall_name}
+                  {showtime.start_time} - {showtime.end_time} at {showtime.hall_name}
                   <button
-                    // onClick={() => navigate(`/reserve/${showtime.showtime_id}`)} x
-                    x
+                    onClick={() => navigate(`/dashboard/reservation/reserve/${showtime.showtime_id}`)}
                   >
                     Reserve
                   </button>
@@ -57,6 +54,7 @@ const MoviesWithShowtimes = () => {
         ))
       )}
     </div>
+   </Wrapper>
   );
 };
 

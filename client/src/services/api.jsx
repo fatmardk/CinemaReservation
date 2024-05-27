@@ -7,3 +7,4 @@ const api = axios.create({
 export const fetchMovies = () => api.get('/movies/list');
 export const registerUser = (userData) => api.post('/users/register', userData);
 export const makeReservation = (reservationData) => api.post('/reservations/make', reservationData);
+

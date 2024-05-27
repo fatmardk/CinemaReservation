@@ -18,7 +18,7 @@ const Dashboard = () => {
             <div className="flex justify-center mb-2 text-black">
               <IoFootball className="text-5xl" />
             </div>
-            <span className="text-black">Movie Management</span>
+            <span className="text-black">Film 1</span>
           </div>
         </Link>
         <Link to="/dashboard/player-mass" className="team p-5">
@@ -26,7 +26,7 @@ const Dashboard = () => {
             <div className="flex justify-center mb-2 text-black">
               <TbPlayFootball className="text-5xl" />
             </div>
-            <span className="text-black">User Management</span>
+            <span className="text-black">Film 2</span>
           </div>
         </Link>
         <Link to="/dashboard/team/besiktas" className="team p-5">
@@ -34,7 +34,7 @@ const Dashboard = () => {
             <div className="flex justify-center mb-2 text-black">
               <TbBrandDisney className="text-5xl" />
             </div>
-            <span className="text-black">Comment Management</span>
+            <span className="text-black">Film 3</span>
           </div>
         </Link>
         <Link to="/dashboard/management" className="team p-5">
@@ -42,7 +42,7 @@ const Dashboard = () => {
             <div className="flex justify-center mb-2 text-black">
               <CiSettings className="text-5xl" />
             </div>
-            <span className="text-black">Project Management</span>
+            <span className="text-black">Film 4</span>
           </div>
         </Link>
       </div>

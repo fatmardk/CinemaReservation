@@ -7,6 +7,7 @@ const userRoutes = require('./routes/userRoute');
 const movieRoutes = require('./routes/movieRoute');
 const showtimeRoutes = require('./routes/showtimeRoute');
 const reservationRoutes = require('./routes/reservationRoute');
+const discountDaysRouter = require('./routes/discountDaysRouter'); // Düzgün içe aktarma
 
 // Create Express app
 const app = express();
@@ -21,7 +22,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/reservations', reservationRoutes);
-
+app.use('/api/discount-days', discountDaysRouter); // Doğru rotayı kullanın
 
 // Error handling middleware
 app.use((err, req, res, next) => {

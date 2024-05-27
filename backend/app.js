@@ -7,6 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 const showtimeRoutes = require('./routes/showtimeRoutes');
 const reservationRoutes = require('./routes/reservationRoutes');
+const discountDaysRoute = require('./routes/discountDaysRouter');
 
 // Middleware
 app.use(bodyParser.json());
@@ -17,8 +18,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/reservations', reservationRoutes);
+app.use('/api/discount-days', discountDaysRoute);
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
