@@ -19,6 +19,7 @@ const CreateShowTime = () => {
       ...state,
       [e.target.name]: e.target.value,
     });
+    console.log(state.start_time);
   };
 
   const onCreateShowTime = (e) => {
@@ -40,7 +41,7 @@ const CreateShowTime = () => {
       .then((response) => {
         console.log("Response:", response.data);
         alert("Showtime added successfully!");
-        navigate("/dashboard/showtimes");
+        navigate("/dashboard/reservation");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -76,6 +77,7 @@ const CreateShowTime = () => {
           />
           <input
             className="form-control text-black mb-3"
+            type="datetime-local"
             placeholder="Start Time..."
             name="start_time"
             value={state.start_time}
@@ -83,6 +85,7 @@ const CreateShowTime = () => {
           />
           <input
             className="form-control text-black mb-3"
+            type="datetime-local"
             placeholder="End Time..."
             name="end_time"
             value={state.end_time}

@@ -10,7 +10,7 @@ const Showtimes = () => {
   useEffect(() => {
     const fetchShowtimes = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/showtimes");
+        const response = await fetch("http://localhost:8080/api/showtimes/list");
         if (!response.ok) {
           throw new Error("Failed to fetch showtimes");
         }

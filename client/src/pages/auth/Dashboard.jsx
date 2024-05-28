@@ -13,36 +13,28 @@ const Dashboard = () => {
     // canooomm
     <Wrapper>
       <div className="container flex justify-center items-center flex-wrap text-center">
-        <Link to="/dashboard/team/register" className="team p-5">
+        <Link to="/filmsalon/1" className="team p-5">
           <div>
-            <div className="flex justify-center mb-2 text-black">
-              <IoFootball className="text-5xl" />
-            </div>
-            <span className="text-black">Film 1</span>
+            <img src="./public/images/pulp-fiction.jpg" alt="" />
+            <span className="text-black">Pulp Fiction</span>
           </div>
         </Link>
-        <Link to="/dashboard/player-mass" className="team p-5">
+        <Link to="/filmsalon/2" className="team p-5">
           <div>
-            <div className="flex justify-center mb-2 text-black">
-              <TbPlayFootball className="text-5xl" />
-            </div>
-            <span className="text-black">Film 2</span>
+           <img src="./public/images/interstaller.jpg" alt="" />
+            <span className="text-black">Interstaller</span>
           </div>
         </Link>
-        <Link to="/dashboard/team/besiktas" className="team p-5">
+        <Link to="/filmsalon/3" className="team p-5">
           <div>
-            <div className="flex justify-center mb-2 text-black">
-              <TbBrandDisney className="text-5xl" />
-            </div>
-            <span className="text-black">Film 3</span>
+            <img src="./public/images/inception.jpg" alt="" />
+            <span className="text-black">Inception</span>
           </div>
         </Link>
-        <Link to="/dashboard/management" className="team p-5">
+        <Link to="/filmsalon/9" className="team p-5">
           <div>
-            <div className="flex justify-center mb-2 text-black">
-              <CiSettings className="text-5xl" />
-            </div>
-            <span className="text-black">Film 4</span>
+            <img src="./public/images/dark-knight.jpg" alt="" />
+            <span className="text-black">The Drak Knight</span>
           </div>
         </Link>
       </div>

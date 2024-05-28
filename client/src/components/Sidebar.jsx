@@ -12,9 +12,9 @@ const Sidebar = ({ side, closeSidebar }) => {
     <div
       className={`fixed z-10 top-0 ${side} sm:left-0  w-64 h-screen bg-palette1 transition-all ease-in-out duration-200`}
     >
-      <div>
-        <img src="././public/images/logo.png" alt="Logo" />
-      </div>
+      <Link to="/dashboard">
+        <img src="/logo.png" alt="Logo" />
+      </Link>
       <ul className="mt-3">
         <li className="px-4 py-3 transition-all text-white flex items-center justify-center sm:hidden">
           <BsXCircle

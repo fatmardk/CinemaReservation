@@ -30,7 +30,7 @@ const Routing = () => {
         <Route path="/auth/login-admin" element={<LoginAdmin />} />
         <Route path="/reservation-details" element={<ReservationDetails state={state} />} />
 
-        <Route path="/" element={<Private><Home /></Private>} />
+        <Route path="" element={<Private><Dashboard /></Private>} />
         <Route path="/filmler" element={<Private><Filmler /></Private>} />
         <Route path="/filmsalon/:movie_id" element={<Private><FilmSalonlari /></Private>} />
         <Route path="/rezervasyon/:showtime_id" element={<Private><Rezervasyon setState={setState} /></Private>} />

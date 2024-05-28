@@ -43,7 +43,7 @@ const LoginAdmin = () => {
 
       localStorage.setItem("user-token", token);
       dispatch(setUserToken(token));
-      navigate("/dashboard/");
+      navigate("/dashboard");
     }
   }, [response.isSuccess]);
 

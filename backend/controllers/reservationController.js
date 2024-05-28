@@ -64,14 +64,17 @@ const getReservedSeats = async (req, res) => {
 const makeReservation = async (req, res) => {
   const { user_id, showtime_id, seat_number, priceCategory, discountDay } =
     req.body;
+    console.log("1", priceCategory, " || ", discountDay);
   const date = new Date();
   const currentDate = date.toLocaleDateString("en-US", { weekday: "long" });
-
+console.log("cd, dd", currentDate, discountDay);
   const tempBool = currentDate == discountDay;
-  let priceCat = 2;
+  console.log(tempBool);
+  let priceCat = priceCategory;
   if (tempBool) {
     priceCat = priceCategory == 1 ? 3 : 4;
   }
+  console.log("2 |", "pricecategory:", priceCategory, " || pricecat", priceCat);
 
   const checkReservationQuery = `
       SELECT * FROM Tbl_Reservations 
@@ -117,8 +120,10 @@ const makeReservation = async (req, res) => {
               }
 
               const price = priceResult[0].price;
-
+              console.log("price", price);
               const discountedPrice = price;
+              console.log("discountedprice", discountedPrice);
+
               let priceTemp;
               switch (priceCategory) {
                 case 1:
@@ -127,10 +132,15 @@ const makeReservation = async (req, res) => {
                 case 2:
                   priceTemp = "Sivil";
                   break;
-                default:
-                  priceTemp = "Sivil";
+                case 3:
+                  priceTemp = "OgrenciCars";
+                  break;
+                case 4:
+                  priceTemp = "SivilCars";
                   break;
               }
+
+              console.log("pricetemp", priceTemp);
 
               const addReservationQuery = `
                 INSERT INTO Tbl_Reservations (user_id, showtime_id, seat_number, category, price)
