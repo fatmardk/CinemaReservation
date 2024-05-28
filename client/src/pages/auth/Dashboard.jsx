@@ -15,26 +15,26 @@ const Dashboard = () => {
       <div className="container flex justify-center items-center flex-wrap text-center">
         <Link to="/filmsalon/1" className="team p-5">
           <div>
-            <img src="./public/images/pulp-fiction.jpg" alt="" />
-            <span className="text-black">Pulp Fiction</span>
+            <img src="/images/pulp-fiction.jpg" alt="" />
+            <span className="text-white font-semibold text-lg mt-2">Pulp Fiction</span>
           </div>
         </Link>
         <Link to="/filmsalon/2" className="team p-5">
           <div>
-           <img src="./public/images/interstaller.jpg" alt="" />
-            <span className="text-black">Interstaller</span>
+           <img src="/images/interstaller.jpg" alt="" />
+            <span className="text-white font-semibold text-lg mt-2">Interstaller</span>
           </div>
         </Link>
         <Link to="/filmsalon/3" className="team p-5">
           <div>
-            <img src="./public/images/inception.jpg" alt="" />
-            <span className="text-black">Inception</span>
+            <img src="/images/inception.jpg" alt="" />
+            <span className="text-white font-semibold text-lg mt-2">Inception</span>
           </div>
         </Link>
         <Link to="/filmsalon/9" className="team p-5">
           <div>
-            <img src="./public/images/dark-knight.jpg" alt="" />
-            <span className="text-black">The Drak Knight</span>
+            <img src="/images/dark-knight.jpg" alt="" />
+            <span className="text-white font-semibold text-lg mt-2">The Drak Knight</span>
           </div>
         </Link>
       </div>

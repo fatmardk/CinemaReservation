@@ -61,23 +61,23 @@ const ReservationsPage = () => {
               </thead>
               <tbody>
                 {movies.map((movie) => (
-                  <tr key={movie.movie_id} className="odd:bg-gray-200">
-                    <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                  <tr key={movie.movie_id} className="odd:bg-gray-200 odd:text-gray-800">
+                    <td className="p-3 capitalize text-sm font-normal">
                       {movie.title}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                    <td className="p-3 capitalize text-sm font-normal">
                       {movie.summary}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal flex-wrap text-gray-400">
+                    <td className="p-3 capitalize text-sm font-normal flex-wrap">
                       {movie.duration} min
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                    <td className="p-3 capitalize text-sm font-normal">
                       {movie.director}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                    <td className="p-3 capitalize text-sm font-normal">
                       {movie.genre}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                    <td className="p-3 capitalize text-sm font-normal">
                       {" "}
                       <Link
                         to={`/filmsalon/${movie.movie_id}`}

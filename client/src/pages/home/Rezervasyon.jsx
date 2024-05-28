@@ -12,6 +12,7 @@ const Rezervasyon = ({ setState }) => {
   const [loading, setLoading] = useState(true);
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [receipt, setReceipt] = useState(null);
+  const [categoryBg, setCategoryBg] = useState(true);
   const [category, setCategory] = useState({
     category: "",
     price: "",
@@ -21,52 +22,9 @@ const Rezervasyon = ({ setState }) => {
   const totalSeats = Array.from({ length: 20 }, (_, i) => i + 1); // 1-20 koltuk numaralarını içeren dizi
 
   const { user } = useSelector((userred) => userred.authReducer);
-  // console.log(user);
-  // const makeRes = async () => {
 
-  //   const response = axios.post("http://localhost:8080/api/reservations/make",{
-  //     "user_id": user.id,
-  //     "showtime_id": showtime_id,
-  //     "seat_number": selectedSeat,
-  //     "category": category.category
-  // });
-
-  // const status= (await response).status;
-  // if (status==200){
-
-  // }
-
-  // }
   const makeRes = async () => {
     try {
-      // Tarih bilgisini al ve gerekiyorsa category'i düzenle
-
-      // const response3 = await axios.get(
-      //   "http://localhost:8080/api/discount-days/all"
-      // );
-      // const discountDay = await response3.data[0].day_of_week;
-      // const date = new Date();
-      // let currentDate = date.getDay();
-      // if (currentDate == 1) {
-      //   currentDate = "Monday";
-      // }
-      // console.log("dd", discountDay);
-      // console.log("cd", currentDate);
-
-      // if (currentDate == discountDay) {
-      //   if (category.categoryid == 1) {
-      //     setCategory({
-      //       category: "İndirim Günü Öğrenci",
-      //       price: category.price * 0.2,
-      //       categoryid: 3,
-      //     });
-      //   } else {
-      //     setCategory({
-      //       category: "İndirim Günü Sivil",
-      //       price: category.price * 0.2,
-      //       categoryid: 4,
-      //     });
-      //   }
       const response3 = await axios.get("http://localhost:8080/api/discount-days/all");
       const discountDay = response3.data[0].day_of_week; // response3.data'ya direkt erişiyoruz
 
@@ -96,9 +54,6 @@ const Rezervasyon = ({ setState }) => {
           price: response.data.discountedPrice,
           selectedSeat: selectedSeat,
         };
-
-        console.log(category);
-        console.log(reservationDetails.price);
 
         setState(reservationDetails);
         navigate("/reservation-details");
@@ -219,13 +174,16 @@ const Rezervasyon = ({ setState }) => {
                 .map((price) => (
                   <li
                     key={price.price_id}
-                    className="border shadow-2xl px-5 py-2 bg-zinc-700 cursor-pointer m-4 transition-all ease-out hover:bg-slate-900"
-                    onClick={() =>
+                    className={`border shadow-2xl px-5 py-2 ${categoryBg ? `bg-slate-600 disabled` : `bg-slate-900`} cursor-pointer m-4 transition-all ease-out hover:bg-slate-900`}
+                    onClick={() => {
                       setCategory({
                         price: price.price,
                         category: price.category,
                         categoryid: price.price_id,
                       })
+                      setCategoryBg(!categoryBg);
+                    }
+
                     }
                   >
                     {price.category}: {price.price} TL
@@ -253,7 +211,7 @@ const Rezervasyon = ({ setState }) => {
           </h3>
           <button
             type="submit"
-            className="submit-button border border-white p-2 px-4 rounded-lg shadow-lg bg-gray-700 mt-2 hover:bg-gray-900 transition-all ease-in"
+            className="cursor-pointer submit-button border border-white p-2 px-4 rounded-lg shadow-lg bg-gray-700 mt-2 hover:bg-gray-900 transition-all ease-in"
             disabled={!selectedSeat}
             onClick={makeRes}
           >
