@@ -10,11 +10,12 @@ const Showtimes = () => {
   useEffect(() => {
     const fetchShowtimes = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/showtimes/list");
+        const response = await fetch("http://localhost:8080/api/showtimes");
         if (!response.ok) {
           throw new Error("Failed to fetch showtimes");
         }
         const data = await response.json();
+        console.log(data);
         setShowtimes(data);
       } catch (error) {
         console.error("Error fetching showtimes:", error);

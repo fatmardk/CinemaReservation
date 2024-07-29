@@ -8,14 +8,14 @@ const AdminNavigation = ({ openSidebar }) => {
     dispatch(logout('user-token'));
   };
   return (
-    <nav className="fixed left-0 sm:left-64 top-4 right-0">
-      <div className="gradmenufooter w-full flex items-center p-4">
+    <nav className="absolute left-0 sm:left-64 top-4 right-0 mx-4">
+      <div className="bg-[#e1c4a5] w-full justify-between sm:justify-end items-center flex p-4 h-15">
         <BsFilterLeft
-          className="text-white text-3xl cursor-pointer sm:hidden block"
+          className="bi bi-filter-left text-white text-2xl cursor-pointer sm:hidden block" 
           onClick={openSidebar}
         />
         <button
-          className="py-2 px-4 ml-auto gradmenufooter opacity-70 text-white rounded-md capitalize"
+          className="py-2 px-4 bg-amber-50 hover:bg-[#937d68] hover:text-white transition 200 text-black rounded-md capitalize"
           onClick={adminLogout}
         >
           Logout

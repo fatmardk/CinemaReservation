@@ -162,7 +162,7 @@ export default {
       fuchsia: colors.fuchsia,
       pink: colors.pink,
       rose: colors.rose,
-      palette1: '#18122B',
+      palette1: '#b49c84',
       palette2: '#393053',
       palette3: '#443C68',
       palette4: '#635985',

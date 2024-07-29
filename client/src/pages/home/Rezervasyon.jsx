@@ -174,7 +174,7 @@ const Rezervasyon = ({ setState }) => {
                 .map((price) => (
                   <li
                     key={price.price_id}
-                    className={`border shadow-2xl px-5 py-2 ${categoryBg ? `bg-slate-600 disabled` : `bg-slate-900`} cursor-pointer m-4 transition-all ease-out hover:bg-slate-900`}
+                    className={`border shadow-2xl px-5 py-2 ${categoryBg ? `bg-[#8c7864] disabled` : `bg-gray-500`} cursor-pointer m-4 transition-all ease-out hover:bg-amber-50 hover:text-yellow-800`}
                     onClick={() => {
                       setCategory({
                         price: price.price,
@@ -211,7 +211,7 @@ const Rezervasyon = ({ setState }) => {
           </h3>
           <button
             type="submit"
-            className="cursor-pointer submit-button border border-white p-2 px-4 rounded-lg shadow-lg bg-gray-700 mt-2 hover:bg-gray-900 transition-all ease-in"
+            className="cursor-pointer submit-button border border-white p-2 px-4 rounded-lg shadow-lg bg-[#8c7864] mt-2 hover:bg-amber-50 hover:text-yellow-800 transition-all ease-in"
             disabled={!selectedSeat}
             onClick={makeRes}
           >

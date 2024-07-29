@@ -36,52 +36,52 @@ const ReservationsPage = () => {
           <Spinner />
         ) : movies.length > 0 ? (
           <div>
-            <table className="w-full rounded-md">
+            <table className="w-full bg-[#907c69] rounded-md">
               <thead>
-                <tr className="border-b border-gray-800 text-left">
-                  <th className="p-3 uppercase text-base font-sm text-gray-500">
+                <tr className="border-b border-white text-left">
+                  <th className="p-3 uppercase text-base font-sm">
                     Title
                   </th>
-                  <th className="p-3 uppercase text-base font-sm text-gray-500">
+                  <th className="p-3 uppercase text-base font-sm">
                     Summary
                   </th>
-                  <th className="p-3 uppercase text-base font-sm text-gray-500">
+                  <th className="p-3 uppercase text-base font-sm">
                     Duration
                   </th>
-                  <th className="p-3 uppercase text-base font-sm text-gray-500">
+                  <th className="p-3 uppercase text-base font-sm">
                     Director
                   </th>
-                  <th className="p-3 uppercase text-base font-sm text-gray-500">
+                  <th className="p-3 uppercase text-base font-sm">
                     Genre
                   </th>
-                  <th className="p-3 uppercase text-base font-sm text-gray-500">
+                  <th className="p-3 uppercase text-base font-sm">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {movies.map((movie) => (
-                  <tr key={movie.movie_id} className="odd:bg-gray-200 odd:text-gray-800">
-                    <td className="p-3 capitalize text-sm font-normal">
+                  <tr key={movie.movie_id} className="odd:bg-[#b49c84]">
+                    <td className="p-3 text-base font-small">
                       {movie.title}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal">
+                    <td className="p-3 capitalize text-base font-small">
                       {movie.summary}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal flex-wrap">
+                    <td className="p-3 capitalize text-base font-small">
                       {movie.duration} min
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal">
+                    <td className="p-3 capitalize text-base font-small">
                       {movie.director}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal">
+                    <td className="p-3 capitalize text-base font-small">
                       {movie.genre}
                     </td>
-                    <td className="p-3 capitalize text-sm font-normal">
+                    <td className="p-3 capitalize text-base font-small">
                       {" "}
                       <Link
                         to={`/filmsalon/${movie.movie_id}`}
-                        className="bg-palette1 px-6 py-3 cursor-pointer text-white rounded-md inline-block text-center"
+                        className="bg-white px-6 py-3 cursor-pointer text-gray-800 rounded-md border border-white inline-block text-center hover:bg-[#a88c6f] hover:text-white transition 200"
                         style={{ minWidth: "150px" }}
                       >
                         Salonları Gör

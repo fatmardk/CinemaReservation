@@ -63,6 +63,11 @@
   @apply py-1.5 text-center opacity-custom-team-info hover:bg-transparent transition-colors duration-200 ease-out cursor-pointer px-4 border-2 shadow-lg rounded-lg inline-block mr-5;
 }
 
-.btn-dark {
-  @apply bg-palette1 px-4 py-3 capitalize font-medium cursor-pointer;
+.btn{
+  @apply py-2 px-5 border border-white rounded-sm text-white uppercase
+}
+
+
+.btn-dark{
+  @apply bg-[#b49c84] px-4 py-3 capitalize font-medium mt-5;
 }

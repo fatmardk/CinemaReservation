@@ -68,3 +68,4 @@ const HallsList = () => {
 };
 
 export default HallsList;
+

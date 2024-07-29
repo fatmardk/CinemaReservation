@@ -7,7 +7,7 @@ router.post('/add', addShowtime);
 
 // List all showtimes
 router.get('/list', listShowtimes);
-router.get('/:', getShowtimesWithMoviesAndHalls);
+router.get('/', getShowtimesWithMoviesAndHalls);
 router.get('/hall/:hall_id', getMoviesByHall);
 router.get('/movie/:movie_id', getShowtimesByMovie);
 

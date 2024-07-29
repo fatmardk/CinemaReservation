@@ -40,16 +40,16 @@ const FilmSalonlari = () => {
         <div>
           <table className="w-full rounded-md">
             <thead>
-              <tr className="border-b border-gray-800 text-left">
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Start Time</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">End Time</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Hall Name</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Actions</th>
+              <tr className="border-b border-white text-left">
+                <th className="p-3 uppercase text-base font-sm">Start Time</th>
+                <th className="p-3 uppercase text-base font-sm">End Time</th>
+                <th className="p-3 uppercase text-base font-sm">Hall Name</th>
+                <th className="p-3 uppercase text-base font-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {showtimes.map((showtime) => (
-                <tr key={showtime.start_time} className="odd:bg-gray-200 odd:text-gray-800">
+                <tr key={showtime.start_time} className="odd:bg-[#b49c84]">
                   <td className="p-3 capitalize text-sm font-normal">{new Date(showtime.start_time).toLocaleString()}</td>
                   <td className="p-3 capitalize text-sm font-normal">{new Date(showtime.end_time).toLocaleString()}</td>
                   <td className="p-3 capitalize text-sm font-normal">{showtime.hall_name}</td>
@@ -57,7 +57,7 @@ const FilmSalonlari = () => {
                   <td className="p-3 capitalize text-sm font-normal">
                     <Link
                       to={`/rezervasyon/${showtime.showtime_id}`}
-                      className="bg-palette1 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md"
+                      className="bg-white w-1/4 px-5 py-2 cursor-pointer text-yellow-800 border border-yellow-800 rounded-md"
                     >
                       Rezervasyon Yap
                     </Link>

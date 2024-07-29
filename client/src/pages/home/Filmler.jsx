@@ -34,9 +34,9 @@ useEffect(() => {
         <Spinner />
       ) : movies.length > 0 ? (
         <div>
-          <table className="w-full rounded-md">
+          <table className="w-full bg-[#907c69] rounded-md">
             <thead>
-              <tr className="border-b border-gray-800 text-left">
+              <tr className="border-b border-white text-left">
                 <th className="p-3 uppercase text-base font-sm text-gray-500">Title</th>
                 <th className="p-3 uppercase text-base font-sm text-gray-500">Summary</th>
                 <th className="p-3 uppercase text-base font-sm text-gray-500">Duration</th>
@@ -47,8 +47,8 @@ useEffect(() => {
             </thead>
             <tbody>
               {movies.map((movie) => (
-                <tr key={movie.movie_id} className="odd:bg-gray-200">
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.title}</td>
+                <tr key={movie.movie_id} className="odd:bg-[#b49c84]">
+                  <td className="p-3 capitalize text-sm font-normal text-white">{movie.title}</td>
                   <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.summary}</td>
                   <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.duration} min</td>
                   <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.director}</td>

@@ -58,7 +58,7 @@ const Movies = () => {
       <ScreenHeader>
         <Link
           to="/dashboard/movies/add"
-          className="btn-dark inline-flex items-center"
+          className="bg-[#b49c84] px-4 py-3 capitalize font-medium mt-5 inline-flex items-center"
         >
           Create Movie
         </Link>
@@ -67,34 +67,34 @@ const Movies = () => {
         <Spinner />
       ) : movies.length > 0 ? (
         <div>
-          <table className="w-full bg-palette1 rounded-md">
+          <table className="w-full bg-[#907c69] rounded-md">
             <thead>
-              <tr className="border-b border-gray-800 text-left">
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Title</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Summary</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Duration</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Director</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Genre</th>
-                <th className="p-3 uppercase text-base font-sm text-gray-500">Actions</th>
+              <tr className="border-b border-white text-left">
+                <th className="p-3 uppercase text-base font-sm">Title</th>
+                <th className="p-3 uppercase text-base font-sm">Summary</th>
+                <th className="p-3 uppercase text-base font-sm">Duration</th>
+                <th className="p-3 uppercase text-base font-sm">Director</th>
+                <th className="p-3 uppercase text-base font-sm">Genre</th>
+                <th className="p-3 uppercase text-base font-sm">Actions</th>
               </tr>
             </thead>
             <tbody>
               {movies.map((movie) => (
-                <tr key={movie.MovieID} className="odd:bg-gray-800">
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.title}</td>
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.summary}</td>
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.duration} min</td>
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.director}</td>
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">{movie.genre}</td>
-                  <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                <tr key={movie.MovieID} className="odd:bg-[#b49c84]">
+                  <td className="p-3 capitalize text-sm font-normal text-white">{movie.title}</td>
+                  <td className="p-3 capitalize text-sm font-normal text-white">{movie.summary}</td>
+                  <td className="p-3 capitalize text-sm font-normal text-white">{movie.duration} min</td>
+                  <td className="p-3 capitalize text-sm font-normal text-white">{movie.director}</td>
+                  <td className="p-3 capitalize text-sm font-normal text-white">{movie.genre}</td>
+                  <td className="p-3 capitalize text-sm font-normal text-white">
                     <Link
                       to={`/dashboard/movies/update/${movie.movie_id}`}
-                      className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md"
+                      className="bg-orange-400 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md mr-3"
                     >
                       Edit
                     </Link>
                     <a
-                      className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md"
+                      className="bg-red-700 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md"
                       onClick={() => deleteMovie(movie.movie_id)}
                     >
                       Delete

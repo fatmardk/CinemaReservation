@@ -5,64 +5,6 @@ const server = "LAPTOP-EJE4K8T5\\SQLEXPRESS";
 const database = "SinemaRezervasyon";
 const userName = "LAPTOP-EJE4K8T5\\USER";
 const connectionString = `Server=${server};Database=${database};UID=${userName};Trusted_Connection=yes;Driver={ODBC Driver 17 for SQL Server}`;
-
-// const addShowtime = async (req, res) => {
-//     const { movie_id, hall_id, start_time, end_time } = req.body;
-//     const insertShowtimeQuery = `
-//         INSERT INTO Tbl_Showtimes (movie_id, hall_id, start_time, end_time)
-//         VALUES (?, ?, ?, ?)
-//     `;
-
-//     try {
-//         sql.query(connectionString, insertShowtimeQuery, [movie_id, hall_id, start_time, end_time], (err, result) => {
-//             if (err) {
-//                 console.log(err);
-//                 return res.status(500).json({ error: "Server internal error." });
-//             } else {
-//                 return res.status(201).json({ msg: "Showtime added successfully." });
-//             }
-//         });
-//     } catch (error) {
-//         console.log(error.message);
-//         return res.status(500).json({ error: "Server internal error." });
-//     }
-// };
-
-// const addShowtime = async (req, res) => {
-//     const { movie_id, hall_id, start_time, end_time } = req.body;
-  
-//     // Convert the datetime-local format to SQL Server datetime format
-//     const formatDateTime = (dateTime) => {
-//       return dateTime.replace("T", " ") + ":00";
-//     };
-  
-//     const formattedStartTime = formatDateTime(start_time);
-//     const formattedEndTime = formatDateTime(end_time);
-  
-//     const insertShowtimeQuery = `
-//       INSERT INTO Tbl_Showtimes (movie_id, hall_id, start_time, end_time)
-//       VALUES (?, ?, ?, ?)
-//     `;
-  
-//     try {
-//       sql.query(
-//         connectionString,
-//         insertShowtimeQuery,
-//         [movie_id, hall_id, formattedStartTime, formattedEndTime],
-//         (err, result) => {
-//           if (err) {
-//             console.log(err);
-//             return res.status(500).json({ error: "Server internal error." });
-//           } else {
-//             return res.status(201).json({ msg: "Showtime added successfully." });
-//           }
-//         }
-//       );
-//     } catch (error) {
-//       console.log(error.message);
-//       return res.status(500).json({ error: "Server internal error." });
-//     }
-//   };
   
 const addShowtime = async (req, res) => {
     const { movie_id, hall_id, start_time, end_time } = req.body;

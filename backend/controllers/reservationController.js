@@ -74,7 +74,7 @@ console.log("cd, dd", currentDate, discountDay);
   if (tempBool) {
     priceCat = priceCategory == 1 ? 3 : 4;
   }
-  console.log("2 |", "pricecategory:", priceCategory, " || pricecat", priceCat);
+  // console.log("2 |", "pricecategory:", priceCategory, " || pricecat", priceCat);
 
   const checkReservationQuery = `
       SELECT * FROM Tbl_Reservations 
